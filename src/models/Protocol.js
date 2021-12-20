@@ -64,6 +64,7 @@ export default class Protocol {
       "schema:schemaVersion": this.ref.protocolVersion,
       "schema:version": this.ref.protocolVersion,
       landingPageContent: this.ref.markdownData, //point to the readme of protocol
+      landingPageType: this.ref.landingPageType,
       landingPage: "",
       // variableMap: variableMap,
       ui: {
@@ -298,7 +299,8 @@ export default class Protocol {
       image: applet['schema:image'],
       watermark: applet['schema:watermark'],
       description: applet['schema:description'][0]['@value'],
-      protocolVersion: _.get(applet, 'schema:schemaVersion[0].@value', this.protocolVersion)
+      protocolVersion: _.get(applet, 'schema:schemaVersion[0].@value', this.protocolVersion),
+      landingPageType: _.get(applet, ['reprolib:terms/landingPageType', 0, '@value'], 'markdown')
     };
 
     const markdownData = _.get(applet, ["reprolib:terms/landingPage", 0, "@value"], "");
